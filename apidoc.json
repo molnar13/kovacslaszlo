@@ -1,0 +1,27 @@
+{
+  "name": "Magyar Irányítószám API",
+  "version": "1.0.0",
+  "description": "Hungarian Postal Code REST API Documentation",
+  "title": "ZIP Code API - Dokumentáció",
+  "url": "http://localhost:8000",
+  "sampleUrl": "http://localhost:8000",
+  "header": {
+    "title": "Bevezetés",
+    "content": "<h1>Magyar Irányítószám API</h1>\n<p>Üdvözöljük a Magyar Irányítószám API dokumentációjában!</p>\n<p>Ez az API lehetővé teszi a magyar megyék, városok és irányítószámok kezelését.</p>\n\n<h2>Autentikáció</h2>\n<p>Az API-hoz való hozzáféréshez Laravel Sanctum token-alapú autentikációt használunk.</p>\n<p>A védett végpontokhoz a következő HTTP header szükséges:</p>\n<pre><code>Authorization: Bearer YOUR_ACCESS_TOKEN</code></pre>\n\n<h2>Token megszerzése</h2>\n<ol>\n  <li>Regisztráció: <code>POST /api/register</code></li>\n  <li>Bejelentkezés: <code>POST /api/login</code></li>\n  <li>Kapott token használata a védett végpontoknál</li>\n</ol>\n\n<h2>HTTP státuszkódok</h2>\n<ul>\n  <li><code>200 OK</code> - Sikeres lekérdezés</li>\n  <li><code>201 Created</code> - Sikeres létrehozás</li>\n  <li><code>401 Unauthorized</code> - Hiányzó vagy érvénytelen autentikáció</li>\n  <li><code>404 Not Found</code> - Az erőforrás nem található</li>\n  <li><code>410 Gone</code> - Sikeres törlés</li>\n  <li><code>422 Unprocessable Entity</code> - Validációs hiba</li>\n</ul>\n\n<h2>Adatstruktúra</h2>\n<p>Az API hierarchikus struktúrát követ:</p>\n<pre>\nMegye (County)\n  └── Város (City)\n      └── Irányítószám (ZipCode)\n</pre>\n\n<h2>Példa használat</h2>\n<pre><code># 1. Regisztráció\ncurl -X POST http://localhost:8000/api/register \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"name\":\"Kovács László\",\"email\":\"kovacs@example.com\",\"password\":\"password123\",\"password_confirmation\":\"password123\"}'\n\n# 2. Megyék lekérése (nincs szükség tokenre)\ncurl http://localhost:8000/api/counties\n\n# 3. Új megye létrehozása (token szükséges)\ncurl -X POST http://localhost:8000/api/counties \\\n  -H \"Authorization: Bearer YOUR_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"name\":\"Pest\"}'\n</code></pre>"
+  },
+  "footer": {
+    "title": "További információk",
+    "content": "<p>Ez a dokumentáció automatikusan generált az APIDoc használatával.</p>\n<p>Készítette: Kovács László</p>\n<p>Frissítve: 2024</p>"
+  },
+  "template": {
+    "withCompare": false,
+    "withGenerator": true
+  },
+  "order": [
+    "Authentication",
+    "County",
+    "Settlement",
+    "PostalCode",
+    "ZipCode"
+  ]
+}
