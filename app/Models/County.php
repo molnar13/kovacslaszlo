@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class County extends Model
 {
@@ -12,13 +11,13 @@ class County extends Model
 
     protected $fillable = ['name'];
 
-    public function cities(): HasMany
+    public function cities()
     {
         return $this->hasMany(City::class);
     }
 
-    public function postalCodes(): HasMany
+    public function settlements()
     {
-        return $this->hasManyThrough(PostalCode::class, City::class);
+        return $this->hasMany(Settlement::class);
     }
 }

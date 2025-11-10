@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PostalCode extends Model
 {
@@ -12,9 +11,7 @@ class PostalCode extends Model
 
     protected $fillable = ['code', 'city_id'];
 
-    protected $with = ['city.county'];
-
-    public function city(): BelongsTo
+    public function city()
     {
         return $this->belongsTo(City::class);
     }

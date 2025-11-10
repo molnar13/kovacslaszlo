@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use App\Models\County;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CountyFactory extends Factory
+class CityFactory extends Factory
 {
-    protected $model = County::class;
+    protected $model = City::class;
 
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->words(2, true),
+            'name' => $this->faker->unique()->city(),
+            'county_id' => County::factory(),
         ];
     }
 }
