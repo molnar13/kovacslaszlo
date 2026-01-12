@@ -43,24 +43,26 @@ class SettlementControllerTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function test_store_creates_new_settlement(): void
+    public function test_store_creates_new_settlement()
     {
-        $county = County::factory()->create(['name' => 'Pest']);
+        $user = \App\Models\User::factory()->create();
 
-        $user = User::factory()->create();
-        $token = $user->createToken('TestToken')->plainTextToken;
+        $county = \App\Models\County::factory()->create();
 
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->postJson('/api/settlements', [
+        $response = $this->actingAs($user)->postJson('/api/settlements', [
             'name' => 'Szeged',
-            'county_id' => $county->id
+            'county_id' => $county->id,
+            'postal_code' => '6720'
         ]);
 
         $response->assertStatus(201)
-            ->assertJsonFragment(['name' => 'Szeged']);
-
-        $this->assertDatabaseHas('settlements', ['name' => 'Szeged', 'county_id' => $county->id]);
+                 ->assertJsonFragment(['name' => 'Szeged']);
+                 
+        $this->assertDatabaseHas('settlements', [
+            'name' => 'Szeged', 
+            'county_id' => $county->id,
+            'postal_code' => '6720'
+        ]); 
     }
 
     public function test_store_validates_required_name(): void

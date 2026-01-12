@@ -10,11 +10,12 @@ class SettlementFactory extends Factory
 {
     protected $model = Settlement::class;
 
-    public function definition(): array
+    public function definition()
     {
         return [
-            'name' => $this->faker->unique()->city(),
-            'county_id' => County::factory(),
+            'name' => $this->faker->city(),
+            'county_id' => \App\Models\County::factory(),
+            'postal_code' => $this->faker->postcode(), 
         ];
     }
 }
