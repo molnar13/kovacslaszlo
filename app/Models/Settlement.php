@@ -9,7 +9,7 @@ class Settlement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'county_id'];
+    protected $fillable = ['name', 'county_id', 'postal_code', ];
 
     public function county()
     {

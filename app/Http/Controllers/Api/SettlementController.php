@@ -126,13 +126,17 @@ class SettlementController extends Controller
      */
     public function store(Request $request)
     {
+        // 1. Validálás (postal_code kötelező!)
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string',
             'county_id' => 'required|exists:counties,id',
+            'postal_code' => 'required', // <--- Ez a sor kritikus!
         ]);
 
+        // 2. Létrehozás a validált adatokból
         $settlement = Settlement::create($validated);
-        return response()->json($settlement->load('county'), 201);
+
+        return response()->json($settlement, 201);
     }
 
     /**

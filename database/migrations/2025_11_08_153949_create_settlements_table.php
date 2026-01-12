@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('postal_code');
             $table->foreignId('county_id')->constrained('counties')->onDelete('cascade');
             $table->timestamps();
         });
